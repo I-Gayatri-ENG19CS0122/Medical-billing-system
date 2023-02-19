@@ -1,0 +1,56 @@
+a. To add drug details: 
+Class.forName("java.sql.DriverManager"); 
+Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost/project", "root", "manager"); 
+Statement s=(Statement)c.createStatement(); 
+s.executeUpdate("insert into medicines values ('"+dnm+"','"+qty+"','"+com+"','"+mrp+"')"); JOptionPane.showMessageDialog(this, "drug added successfully"); 
+new admin_changes().setVisible(true); 
+setVisible(false); 
+b. To delete drug details: 
+Class.forName("java.sql.DriverManager"); 
+Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost/project", "root", "manager"); 
+Statement s=(Statement)c.createStatement(); 
+s.executeUpdate("delete from medicines where drug_name='"+dnm+"'"); 
+JOptionPane.showMessageDialog(this, "item deleted successfully"); 
+new admin_changes().setVisible(true); 
+setVisible(false); 
+c. To update drug details: 
+Class.forName("java.sql.DriverManager"); 
+Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost/project", "root", "manager"); 
+Statement s=(Statement)c.createStatement(); 
+s.executeUpdate("update medicines set 
+drug_name='"+dnm+"',quantity='"+qty+"',company='"+com+"',mrp='"+mrp+"' where drug_name='"+dnm+"' "); JOptionPane.showMessageDialog(this, " updated successfully"); 
+new admin_changes().setVisible(true); 
+setVisible(false); 
+d. To search drug details via its name: 
+Class.forName("java.sql.DriverManager"); 
+Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost/project", "root", "manager"); 
+Statement s=(Statement)c.createStatement(); 
+ResultSet rs=s.executeQuery("select *from medicines where drug_name='"+dnm+"'"); 
+int n=dtm.getRowCount(); 
+for(int i=0;i<n;i++) 
+dtm.removeRow(0); 
+while(rs.next()) 
+{ 
+String drnm=rs.getString(1); 
+int qty=rs.getInt(2); 
+String com=rs.getString(3); 
+int mrp=rs.getInt(4); 
+9
+dtm.addRow(new Object[]{dnm,qty,com,mrp,}); 
+} 
+e. To search drug details via its company: 
+Class.forName("java.sql.DriverManager"); 
+Connection c=(Connection)DriverManager.getConnection("jdbc:mysql://localhost/project", "root", "manager"); 
+Statement s=(Statement)c.createStatement(); 
+ResultSet rs=s.executeQuery("select *from medicines where company='"+cnm+"'"); 
+int n=dtm.getRowCount(); 
+for(int i=0;i<n;i++) 
+dtm.removeRow(0); 
+while(rs.next()) 
+{ 
+String drnm=rs.getString(1); 
+int qty=rs.getInt(2); 
+String com=rs.getString(3); 
+int mrp=rs.getInt(4); 
+dtm.addRow(new Object[]{drnm,qty,com,mrp,}); 
+} 
